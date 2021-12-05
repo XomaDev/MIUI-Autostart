@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="mirror">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/mirror.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
