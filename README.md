@@ -29,6 +29,17 @@ if (state == State.DISABLED) {
 }
 ```
 
+### White listed packages (by default)
+
+```java
+Autostart autostart = new Autostart(applicationContext);
+
+// get the list of packages which are 
+// white-listed by system by default
+        
+String[] packagesWhiteListed = autostart.defaultWhiteListedPackages();
+```
+
 <hr>
 
 # Bypass Any OEM Restriction

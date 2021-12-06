@@ -1,8 +1,8 @@
-/**
- * MIUI autostart helper library
- * <p>
- * author: Kumaraswamy B.G (XomaDev)
- * License: MIT license (refer license file)
+/*
+  MIUI autostart helper library
+  <p>
+  author: Kumaraswamy B.G (XomaDev)
+  License: MIT license (refer license file)
  */
 
 
@@ -14,7 +14,9 @@ import android.util.Log;
 import me.weishu.reflection.Reflection;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 @SuppressWarnings("unused")
 public class Autostart {
@@ -24,6 +26,7 @@ public class Autostart {
     private static final String XIAOMI_NAME = "xiaomi";
 
     private static final String MIUI_CLAZZ = "android.miui.AppOpsUtils";
+    private static final String POLICY_CLAZZ = "miui.content.pm.PreloadedAppPolicy";
 
     private static boolean isReflectionEnabled = false;
 
@@ -84,12 +87,9 @@ public class Autostart {
      */
 
     public State getAutoStartState() throws Exception {
-        final Class<?> clazz;
-        try {
-            clazz = Class.forName(MIUI_CLAZZ);
-        } catch (ClassNotFoundException ignored) {
-            // we couldn't find the class name
-            // we are out of luck
+        final Class<?> clazz = getClazz(MIUI_CLAZZ);
+
+        if (clazz == null) {
             return State.NO_INFO;
         }
 
@@ -115,6 +115,40 @@ public class Autostart {
             return State.DISABLED;
         }
         return State.UNEXPECTED_RESULT;
+    }
+
+    @SuppressWarnings("SuspiciousToArrayCall")
+    public String[] defaultWhiteListedPackages() throws NoSuchFieldException, IllegalAccessException {
+        final Class<?> clazz = getClazz(POLICY_CLAZZ);
+        if (clazz == null) {
+            // just return an empty array
+            return new String[0];
+        }
+        final Field field = clazz.getDeclaredField("sProtectedDataApps");
+        field.setAccessible(true);
+
+        // we pass null to `Field.get()` because the field
+        // is statically defined
+        final Object result = field.get(null);
+        if (result instanceof ArrayList<?>) {
+            return ((ArrayList<?>) result).toArray(new String[0]);
+        }
+        final String message = "defaultWhiteListedPackages() unexpected result type";
+        if (result == null) {
+            return new String[0];
+        }
+        Log.e(TAG, message + " " + result.getClass());
+        return new String[0];
+    }
+
+    private Class<?> getClazz(String name) {
+        try {
+            return Class.forName(name);
+        } catch (ClassNotFoundException ignored) {
+            // we couldn't find the class name
+            // we are out of luck
+            return null;
+        }
     }
 
     /**
