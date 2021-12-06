@@ -31,4 +31,12 @@ if (state == State.DISABLED) {
 
 <hr>
 
+# Bypass Any OEM Restriction
+
+There is actually a tricky way to bypass autostart permision in any OEM (probably all).
+
+First we have to know that, like MIUI for e.g, performs check of autostart when the service is about to start and when the service restarts. We can use this behaviour to launch a Foreground state with a notification alive until the app is closed. When it does, you could simply remove the foreground by `stopForeground(bool)` method and the service will continue along. This isnt the good way (but it is worth noting it).
+
+<hr>
+
 Kumaraswamy B.G
