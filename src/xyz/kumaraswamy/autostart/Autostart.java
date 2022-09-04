@@ -10,20 +10,27 @@ package xyz.kumaraswamy.autostart;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Environment;
 import android.util.Log;
 import me.weishu.reflection.Reflection;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Properties;
 
 @SuppressWarnings("unused")
 public class Autostart {
 
     private static final String TAG = "Autostart";
 
-    private static final String XIAOMI_NAME = "xiaomi";
+    private static final String BUILD_PROP = "build.prop";
+    private static final String MIUI_VERSION_CODE_PROP = "ro.miui.ui.version.code";
+    private static final String MIUI_VERSION_NAME_PROP = "ro.miui.ui.version.name";
 
     private static final String MIUI_CLAZZ = "android.miui.AppOpsUtils";
     private static final String POLICY_CLAZZ = "miui.content.pm.PreloadedAppPolicy";
@@ -44,20 +51,29 @@ public class Autostart {
         ENABLED, DISABLED, NO_INFO, UNEXPECTED_RESULT
     }
 
-    public static boolean isXiaomi() {
-        return Build.MANUFACTURER.equalsIgnoreCase(XIAOMI_NAME);
+    public static boolean isMIUI() {
+        try {
+            Properties props = new Properties();
+            props.load(new FileInputStream(new File(Environment.getRootDirectory(), BUILD_PROP)));
+            String versionCode = props.getProperty(MIUI_VERSION_CODE_PROP, null);
+            String versionName = props.getProperty(MIUI_VERSION_NAME_PROP, null);
+            return versionCode != null || versionName != null;
+        } catch (IOException e) {
+            Log.e(TAG, "Can't access system directory");
+        }
+        return false;
     }
 
     /**
      * Create an instance of Autostart, the phone must be Xiaomi device
      *
      * @param context Application context
-     * @throws Exception phone is not Xiaomi device!
+     * @throws Exception phone is not using MIUI!
      */
 
     public Autostart(Context context) throws Exception {
-        if (!isXiaomi()) {
-            throw new Exception("Not a Xiaomi device");
+        if (!isMIUI()) {
+            throw new Exception("Not a MIUI device");
         }
         this.context = context;
 
