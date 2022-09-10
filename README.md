@@ -9,10 +9,53 @@ A library to check MIUI autostart permission state.
 - MIUI 12 (physical device 12.5)
 <hr>
 
-## Usage
+## Setup
 
-Library (.jar) is present in `lib/` directory.
-You can directly use it in your Android project.
+### Gradle
+
+Add the JitPack repository to your build file
+
+```
+    allprojects {
+        repositories {
+            ...
+            maven { url 'https://jitpack.io' }
+        }
+    }
+```
+
+Add the dependency
+
+```
+    dependencies {
+        implementation 'com.github.XomaDev:MIUI-autostart:master-SNAPSHOT'
+    }
+```
+
+### Maven
+
+Add the JitPack repository to your build file
+
+```
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+```
+
+Add the dependency
+
+```
+	<dependency>
+	    <groupId>com.github.XomaDev:MIUI-autostart</groupId>
+	    <artifactId>Bubbles</artifactId>
+	    <version>master-SNAPSHOT</version>
+	</dependency>
+```
+
+## Usage
 
 ```java
 // make sure device is MIUI device, else an 
