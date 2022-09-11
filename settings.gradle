@@ -1,0 +1,2 @@
+rootProject.name = "MIUI-autostart"
+include ':library'
