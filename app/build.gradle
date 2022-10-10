@@ -1,0 +1,46 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 33
+    buildToolsVersion "32.0.0"
+
+    defaultConfig {
+        applicationId "xyz.kumaraswamy.autostarttest"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    // Include library
+    implementation project(":library")
+
+    // Android core
+    def core_version = "1.9.0"
+    implementation "androidx.core:core:$core_version"
+
+    // AppCompat
+    def appcompat_version = "1.5.1"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+
+    // Material components
+    def material_version = "1.6.1"
+    implementation "com.google.android.material:material:$material_version"
+
+}
