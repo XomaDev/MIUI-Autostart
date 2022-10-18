@@ -49,8 +49,8 @@ Add the dependency
 
 ```
 	<dependency>
-	    <groupId>com.github.XomaDev:MIUI-autostart</groupId>
-	    <artifactId>Bubbles</artifactId>
+	    <groupId>com.github.XomaDev</groupId>
+	    <artifactId>MIUI-autostart</artifactId>
 	    <version>master-SNAPSHOT</version>
 	</dependency>
 ```
