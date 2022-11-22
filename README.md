@@ -1,6 +1,7 @@
 # MIUI Autostart
 
 A library to check MIUI autostart permission state.
+Download library (.jar) [here](https://github.com/XomaDev/MIUI-autostart/releases/tag/builds).
 
 ### Supported versions
 
