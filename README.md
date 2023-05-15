@@ -31,7 +31,7 @@ Add the dependency
 
 ```
     dependencies {
-        implementation 'com.github.XomaDev:MIUI-autostart:master-SNAPSHOT'
+	        implementation 'com.github.XomaDev:MIUI-autostart:v1.1'
     }
 ```
 
@@ -54,7 +54,7 @@ Add the dependency
 	<dependency>
 	    <groupId>com.github.XomaDev</groupId>
 	    <artifactId>MIUI-autostart</artifactId>
-	    <version>master-SNAPSHOT</version>
+	    <version>v1.1</version>
 	</dependency>
 ```
 
