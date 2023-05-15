@@ -11,8 +11,8 @@ package xyz.kumaraswamy.autostart;
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
-import me.weishu.reflection.Reflection;
 import org.jetbrains.annotations.Nullable;
+import org.lsposed.hiddenapibypass.HiddenApiBypass;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -62,7 +62,8 @@ public class Autostart {
         this.context = context;
 
         if (!isReflectionEnabled) {
-            Reflection.unseal(context);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+                HiddenApiBypass.addHiddenApiExemptions("");
             isReflectionEnabled = true;
         }
     }

@@ -8,8 +8,6 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 1
-        versionName "1.0"
     }
 
     buildTypes {
@@ -27,9 +25,8 @@ android {
 
 dependencies {
 
-    // Free Reflection
-    def free_reflection_version = "3.1.0"
-    implementation "com.github.tiann:FreeReflection:$free_reflection_version"
+    def reflection_version = "4.3"
+    implementation "org.lsposed.hiddenapibypass:hiddenapibypass:$reflection_version"
 
     // Jetbrains annotations
     def annotations_version = "16.0.2"
