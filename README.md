@@ -31,7 +31,7 @@ Add the dependency
 
 ```
     dependencies {
-	        implementation 'com.github.XomaDev:MIUI-autostart:v1.1'
+	    implementation 'com.github.XomaDev:MIUI-autostart:v1.1'
     }
 ```
 
