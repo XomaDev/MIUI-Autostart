@@ -1,5 +1,7 @@
 # MIUI Autostart
 
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+
 A library to check MIUI autostart permission state.
 
 ### Supported versions
