@@ -4,7 +4,7 @@
 
 A library to check MIUI autostart permission state.
 
-### Supported versions
+### Tested on
 
 - MIUI 10 (firebase)
 - MIUI 11 (physical device 11.0.9)
