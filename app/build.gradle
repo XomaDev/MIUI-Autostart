@@ -3,8 +3,8 @@ plugins {
 }
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion "32.0.0"
+    compileSdk 33
+    buildToolsVersion = '32.0.0'
 
     defaultConfig {
         applicationId "xyz.kumaraswamy.autostarttest"
@@ -21,9 +21,10 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+    namespace 'xyz.kumaraswamy.autostarttest'
 }
 
 dependencies {
@@ -36,11 +37,11 @@ dependencies {
     implementation "androidx.core:core:$core_version"
 
     // AppCompat
-    def appcompat_version = "1.5.1"
+    def appcompat_version = "1.6.1"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
 
     // Material components
-    def material_version = "1.6.1"
+    def material_version = "1.9.0"
     implementation "com.google.android.material:material:$material_version"
 
 }
