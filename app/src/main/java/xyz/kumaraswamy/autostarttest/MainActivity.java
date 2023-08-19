@@ -2,11 +2,13 @@ package xyz.kumaraswamy.autostarttest;
 
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import xyz.kumaraswamy.autostart.Autostart;
+import xyz.kumaraswamy.autostart.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,24 +20,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkAutoStart() {
-        String stateText = "Nothing";
+        String stateText;
+        if (Utils.INSTANCE.isOnMiui()) {
+            Toast.makeText(this, String.valueOf(Autostart.INSTANCE.isAutoStartEnabled(this)),
+                    Toast.LENGTH_LONG).show();
+        }
         try {
-            Autostart autostart = new Autostart(getApplicationContext());
-            Autostart.State state = autostart.getAutoStartState();
-            switch (state) {
-                case ENABLED:
-                    stateText = "Enabled";
-                    break;
-                case DISABLED:
-                    stateText = "Disabled";
-                    break;
-                case NO_INFO:
-                    stateText = "No Info";
-                    break;
-                case UNEXPECTED_RESULT:
-                    stateText = "Unexpected Result";
-                    break;
-            }
+            stateText = switch (Autostart.INSTANCE.getAutoStartState(this)) {
+                case ENABLED -> "Enabled";
+                case DISABLED -> "Disabled";
+                case NO_INFO -> "No Info";
+                case UNEXPECTED_RESULT -> "Unexpected Result";
+            };
         } catch (Exception e) {
             stateText = "Not a Xiaomi device";
         }
