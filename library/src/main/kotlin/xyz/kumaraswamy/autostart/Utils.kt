@@ -1,3 +1,12 @@
+/*
+MIT License
+
+Copyright (c) [2021] Kumaraswamy B G
+Developer: XomaDev
+
+See the accompanying LICENSE file for details.
+*/
+
 package xyz.kumaraswamy.autostart
 
 import android.annotation.SuppressLint
