@@ -12,6 +12,10 @@ A library to check MIUI autostart permission state.
 - MIUI 12 (physical device 12.5)
 - MIUI 13 (untested, but works)
 - MIUI 14 (physical device 14.0.2)
+
+
+<b>But not limited for newer releases</b>
+
 <hr>
 
 ## Setup
@@ -57,72 +61,25 @@ Add the dependency
 </dependency>
 ```
 
-## Kotlin
+## Usage
 
-Using the simple API
-
-```kotlin
-if (Utils.isOnMiui()) {
-  val enabled: Boolean = Autostart.isAutoStartEnabled(context)
-}
-```
-
-Or you can use the raw Autostart API
+It's recommended to use the Safe API, refer documentation
 
 ```kotlin
-val state: Autostart.State = Autostart.getAutoStartState(context)
-
-when (state) {
-  Autostart.State.ENABLED -> {
-    // autostart is enabled
-  }
-  Autostart.State.DISABLED -> {
-    // autostart is disabled
-  }
-  Autostart.State.NO_INFO -> {
-    // no info available (non MIUI phones, mostly)
-  }
-  Autostart.State.UNEXPECTED_RESULT -> {
-    // we got an unknown result
-  }
-}
+val enabled: Boolean = Autostart.getSafeState(context)
 ```
-
-## Java
-
-Using the simple API
-
 ```java
-if (Utils.INSTANCE.isOnMiui()) {
-  boolean enabled = Autostart.INSTANCE.isAutoStartEnabled(this);
-}
+boolean enabled = Autostart.INSTANCE.getSafeState(context);
 ```
 
-```java
-Autostart.State state = Autostart.INSTANCE.getAutoStartState(this);
-
-switch (state) {
-  case ENABLED -> {
-    // autostart is enabled
-  }
-  case DISABLED ->{
-    // autostart is disabled
-  }
-  case NO_INFO -> {
-    // no info available (non MIUI phones, mostly)
-  }
-  case UNEXPECTED_RESULT -> {
-    // we got an unknown result
-  }
-};
-```
+Or using `isAutoStartEnabled(Context, DefaultValue)`
 
 ## Support
 
 [![Paypal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/XomaDev)
 [![Stripe](https://img.shields.io/badge/Stripe-626CD9?style=for-the-badge&logo=Stripe&logoColor=white)](https://buy.stripe.com/eVadUDdeY4ov3QIdR7)
 
-I'm Kumaraswamy, also known as Xoma Dev. A self-taught developer with expertise in Kotlin and Java, I have a strong passion for learning new algorithms. Crafting Android projects is not just work for me, it's where I find my joy and creativity.  
+I'm Kumaraswamy, also known as Xoma Dev. A self-taught developer with expertise in Kotlin and Java, I have a strong passion for learning new algorithms. Crafting Android projects is not just work for me, it's where I find my joy and creativity.
 
 <b>Your support means a lot to me.</b><br>
 
