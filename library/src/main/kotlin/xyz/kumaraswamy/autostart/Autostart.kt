@@ -19,12 +19,6 @@ import kotlin.Exception
 @Suppress("unused")
 object Autostart {
 
-  init {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-      HiddenApiBypass.addHiddenApiExemptions("")
-    }
-  }
-
   private const val TAG = "Autostart"
 
   private const val XIAOMI_NAME = "xiaomi"
@@ -35,8 +29,18 @@ object Autostart {
   private const val STATE_ENABLED = 0
   private const val STATE_DISABLED = 1
 
+  init {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+      try {
+        HiddenApiBypass.addHiddenApiExemptions("")
+      } catch (ignored: Exception) {
+        Log.d(TAG, "Failed to bypass API Exemption")
+      }
+    }
+  }
+
   /**
-   * State for the autostart
+   * Raw State for the autostart
    * ENABLED and DISABLED are the expected results for a MIUI device
    */
   enum class State {
@@ -44,15 +48,46 @@ object Autostart {
   }
 
   /**
-   * Returns whether the Autostart is enabled or not;
    * Recommended usage with `Utils.isOnMiui()`
+   * Returns whether the Autostart is enabled or not;
+   *
+   * @Deprecated use isAutoStartEnabled(Context, Boolean) instead
+   * @throws Exception if couldn't find the information
    */
-
-  fun isAutoStartEnabled(context: Context): Boolean {
+  @Deprecated(message = "Use isAutoStartEnabled(Context, Boolean)")
+  fun isAutostartEnabled(context: Context): Boolean {
     val state = getAutoStartState(context)
     if (state == State.ENABLED || state == State.DISABLED)
       return state == State.ENABLED
     throw Exception("Unhandled, unknown state")
+  }
+
+  /**
+   * Recommended usage with `Utils.isOnMiui()`
+   * Returns whether the Autostart is enabled or not;
+   *
+   * @param defaultValue Value to return on Unexpected result
+   */
+
+  fun isAutoStartEnabled(context: Context, defaultValue: Boolean = true): Boolean {
+    val state = getAutoStartState(context)
+    if (state == State.ENABLED || state == State.DISABLED)
+      return state == State.ENABLED
+    return defaultValue
+  }
+
+  /**
+   * A safe method to check Autostart State, simply returns True
+   * if Autostart state not available
+   *
+   * @return true when {Autostart Enabled (or) State Unavailable} and returns false
+   * when Autostart is actually disabled
+   */
+
+  fun getSafeState(context: Context): Boolean {
+    if (!Utils.isOnMiui())
+      return true
+    return isAutoStartEnabled(context, true)
   }
 
   /**
@@ -80,12 +115,18 @@ object Autostart {
       STATE_ENABLED -> {
         State.ENABLED
       }
+
       STATE_DISABLED -> {
         State.DISABLED
       }
+
       else -> State.UNEXPECTED_RESULT
     }
   }
+
+  /**
+   * Returns a list of whitelisted packages by default
+   */
 
   fun defaultWhiteListedPackages(): Array<String?> {
     val clazz = getClazz(POLICY_CLAZZ)
