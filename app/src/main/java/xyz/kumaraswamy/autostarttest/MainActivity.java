@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private void checkAutoStart() {
         String stateText;
         if (Utils.INSTANCE.isOnMiui()) {
-            Toast.makeText(this, String.valueOf(Autostart.INSTANCE.isAutoStartEnabled(this)),
+            Toast.makeText(this, String.valueOf(Autostart.INSTANCE.isAutoStartEnabled(this, true)),
                     Toast.LENGTH_LONG).show();
         }
         try {
