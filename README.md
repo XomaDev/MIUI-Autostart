@@ -34,7 +34,7 @@ Add the dependency
 
 ```groovy
 dependencies {
-    implementation 'com.github.XomaDev:MIUI-autostart:v1.2'
+    implementation 'com.github.XomaDev:MIUI-autostart:v1.3'
 }
 ```
 
