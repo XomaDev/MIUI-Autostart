@@ -24,7 +24,7 @@ A library to check MIUI autostart permission state.
 
 Add the JitPack repository to your build file
 
-```
+```groovy
 repositories {
     maven { url 'https://jitpack.io' }
 }
@@ -32,7 +32,7 @@ repositories {
 
 Add the dependency
 
-```
+```groovy
 dependencies {
     implementation 'com.github.XomaDev:MIUI-autostart:v1.2'
 }
@@ -42,7 +42,7 @@ dependencies {
 
 Add the JitPack repository to your build file
 
-```
+```html
 <repositories>
     <repository>
         <id>jitpack.io</id>
@@ -53,7 +53,7 @@ Add the JitPack repository to your build file
 
 Add the dependency
 
-```
+```html
 <dependency>
     <groupId>com.github.XomaDev</groupId>
     <artifactId>MIUI-autostart</artifactId>
