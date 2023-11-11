@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "xyz.kumaraswamy.autostarttest"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 34
         versionCode 3
         versionName "1.2"
