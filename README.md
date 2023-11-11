@@ -57,7 +57,7 @@ Add the dependency
 <dependency>
     <groupId>com.github.XomaDev</groupId>
     <artifactId>MIUI-autostart</artifactId>
-    <version>v1.2</version>
+    <version>v1.3</version>
 </dependency>
 ```
 
