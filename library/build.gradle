@@ -4,11 +4,13 @@ plugins {
 }
 
 android {
-    compileSdk 34
+    namespace 'xyz.kumaraswamy.autostart'
+
+    compileSdk = 36
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 34
+        minSdk = 21
+        targetSdk = 36
     }
 
     buildTypes {
@@ -22,17 +24,23 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-    namespace 'xyz.kumaraswamy.autostart'
+
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "17"
+    }
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.12.0'
-    def reflection_version = "4.3"
+    implementation 'androidx.core:core-ktx:1.17.0'
+    def reflection_version = "6.1"
     implementation "org.lsposed.hiddenapibypass:hiddenapibypass:$reflection_version"
 
     // Jetbrains annotations
-    def annotations_version = "23.0.0"
+    def annotations_version = "26.0.2-1"
     implementation "org.jetbrains:annotations:$annotations_version"
 
 }
