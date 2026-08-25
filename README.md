@@ -63,7 +63,7 @@ Add the dependency
 
 ## Usage
 
-It's recommended to use the Safe API, refer documentation
+It's recommended to use the Safe API; refer to the documentation
 
 ```kotlin
 val enabled: Boolean = Autostart.getSafeState(context)
@@ -74,15 +74,22 @@ boolean enabled = Autostart.INSTANCE.getSafeState(context);
 
 Or using `isAutoStartEnabled(Context, DefaultValue)`
 
-## Support
+## Google Play policy
 
-[![Paypal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/XomaDev)
-[![Stripe](https://img.shields.io/badge/Stripe-626CD9?style=for-the-badge&logo=Stripe&logoColor=white)](https://buy.stripe.com/eVadUDdeY4ov3QIdR7)
+This library relies on hidden APIs in the MIUI framework to access the auto-start state. From Android 9 and later, access to hidden APIs is restricted. This library gets around that restriction.
 
-I'm Kumaraswamy, also known as Xoma Dev. A self-taught developer with expertise in Kotlin and Java, I have a strong passion for learning new algorithms. Crafting Android projects is not just work for me, it's where I find my joy and creativity.
+Although I could not find an explicitly stated policy regarding the use of hidden APIs, based on reports, your application might not pass review unless you stop reporting library usage.
 
-<b>Your support means a lot to me.</b><br>
+From _LSPosed/AndroidHiddenApiBypass_:
 
-Finding this solution was really tough. I had to work and research day after day until I finally figured it out. If you can help out with a small donation, it would mean a lot and add value to my work. Thanks a lot!
+_Google Play doesn't allow apps to use hidden APIs, reporting library usage will cause your app to fail app review, you need to disable dependencies info reporting in build.gradle. Remember to update this library to latest version to be compatible with new Android version._
 
-Kumaraswamy B.G
+
+```gradle
+android {
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+}
+```
